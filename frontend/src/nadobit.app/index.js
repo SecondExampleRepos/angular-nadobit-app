@@ -2,18 +2,18 @@ angular.module('nadobit.app', [
     'ui.router',
 ])
 
-.provider('nbState', /*@ngInject*/ function($stateProvider) {
+.provider('nbState', /*@ngInject*/ function($stateProvider: angular.ui.IStateProvider) {
     var self = this;
 
-    this.$get = /*@ngInject*/ function($state) {
+    this.$get = /*@ngInject*/ function($state: angular.ui.IStateService): angular.ui.IStateService {
         return $state;
     };
 
     /**
      * register mutliple states with extended definition
      */
-    this.states = function(definitions, parentName) {
-        definitions.forEach(function(definition) {
+    this.states = function(definitions: any[], parentName?: string): any {
+        definitions.forEach(function(definition: any) {
 
             // definition maybe loaded via require. At some point there is
             // a caching mechanism which reuses exported objects if the imported
@@ -26,7 +26,7 @@ angular.module('nadobit.app', [
                 definition.name = parentName + '.' + definition.name;
             }
 
-            var subStates = null;
+            var subStates: any[] | null = null;
             if ('subStates' in definition) {
                 subStates = definition.subStates;
                 delete definition.subStates;
