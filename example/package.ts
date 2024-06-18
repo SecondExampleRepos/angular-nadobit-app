@@ -1,3 +1,4 @@
+// edited by agent
 // package.ts
 
 interface PackageJson {
